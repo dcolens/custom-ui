@@ -101,7 +101,11 @@ class WeatherCard extends LitElement {
     if (!config.entity) {
       throw new Error("Please define a weather entity");
     }
-    this._config = config;
+    const defaults = {
+      forecast_length: 5,
+      name: ''
+    }
+    this._config = {...defaults, ...config };
   }
 
   shouldUpdate(changedProps) {
@@ -220,7 +224,7 @@ class WeatherCard extends LitElement {
             ? html`
                 <div class="forecast clear">
                   ${
-                    stateObj.attributes.forecast.slice(0, 5).map(
+                    stateObj.attributes.forecast.slice(0, this._config.forecast_length).map(
                       daily => html`
                         <div class="day">
                           <span class="dayname"
@@ -237,7 +241,7 @@ class WeatherCard extends LitElement {
                             class="icon"
                             style="background: none, url(${
                               this.getWeatherIcon(daily.condition.toLowerCase())
-                            }) no-repeat; background-size: contain;"
+                            }) no-repeat; background-size: contain; background-position: center center;"
                           ></i>
                           <br /><span class="highTemp"
                             >${daily.temperature}${
@@ -383,17 +387,20 @@ class WeatherCard extends LitElement {
           width: 100%;
           margin: 0 auto;
           height: 9em;
+          display: flex;
+          flex-direction: row;
+          flex-wrap: wrap;          
         }
 
         .day {
-          display: block;
-          width: 20%;
-          float: left;
           text-align: center;
           color: var(--primary-text-color);
           border-right: 0.1em solid #d9d9d9;
-          line-height: 2;
-          box-sizing: border-box;
+          display: flex;
+          flex-direction: column;
+          flex-basis: 100%;
+          flex: 1;
+          height: 100%;
         }
 
         .dayname {
@@ -426,13 +433,11 @@ class WeatherCard extends LitElement {
         }
 
         .icon {
-          width: 50px;
+          width: 100%;
           height: 50px;
-          margin-right: 5px;
           display: inline-block;
           vertical-align: middle;
-          background-size: contain;
-          background-position: center center;
+          background-size: contain;          
           background-repeat: no-repeat;
           text-indent: -9999px;
         }

@@ -38,6 +38,10 @@ export class WeatherCardEditor extends LitElement {
     return this._config.name || "";
   }
 
+  get _forecast_length() {
+    return this._config.forecast_length || 5;
+  }
+
   get _icons() {
     return this._config.icons || "";
   }
@@ -83,6 +87,12 @@ export class WeatherCardEditor extends LitElement {
                   ></paper-input>
                 `
           }
+          <paper-input
+            label="Forecast Length"
+            .value="${this._forecast_length}"
+            .configValue="${"forecast_length"}"
+            @value-changed="${this._valueChanged}"
+          ></paper-input>
         </div>
       </div>
     `;
