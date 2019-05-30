@@ -333,8 +333,8 @@ class WeatherCard extends LitElement {
           color: var(--primary-text-color);
         }
         .temp {
-          font-weight: 300;
-          font-size: 4em;
+          font-weight: 400;
+          font-size: 5em;
           color: var(--primary-text-color);
           position: absolute;
           right: 1em;
@@ -342,13 +342,13 @@ class WeatherCard extends LitElement {
         }
 
         .tempc {
-          font-weight: 300;
+          font-weight: 400;
           font-size: 1.5em;
           vertical-align: super;
           color: var(--primary-text-color);
           position: absolute;
           right: 1em;
-          margin-top: -14px;
+          margin-top: -4px;
           margin-right: 7px;
         }
 
